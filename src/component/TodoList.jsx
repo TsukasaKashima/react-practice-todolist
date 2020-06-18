@@ -2,30 +2,28 @@ import React from "react";
 import { useState } from "react";
 
 export default () => {
-  const [value, setValue] = useState("");
+  const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
   const [todoList, setTodolist] = useState([]);
 
   function handleChange(event) {
     const newValue = event.target.value;
-    setValue(newValue);
+    setContent(newValue);
   }
   function titleChange(event) {
     const newTitle = event.target.value;
     setTitle(newTitle);
   }
   function addTodo() {
-    const newTodo = { TodoTitle: title, TodoContent: value };
+    const newTodo = { TodoTitle: title, TodoContent: content };
     const newTodoList = [...todoList, newTodo];
     setTodolist(newTodoList);
-    setValue("");
+    setContent("");
     setTitle("");
     textAlert();
   }
   function textAlert() {
-    const textCheck01 = document.getElementById("input01").value;
-    const textCheck02 = document.getElementById("input02").value;
-    if (textCheck01 === "" || textCheck02 === "") {
+    if (title === "" || content === "") {
       alert("いずれかが未入力です");
     }
   }
@@ -48,7 +46,7 @@ export default () => {
             id="input02"
             type="text"
             placeholder="Enter Task"
-            value={value}
+            value={content}
             onChange={handleChange}
           />
         </div>
