@@ -10,12 +10,22 @@ export default () => {
     const newValue = event.target.value;
     setContent(newValue);
   }
+
   function titleChange(event) {
     const newTitle = event.target.value;
     setTitle(newTitle);
   }
+
+  function generateId() {
+    return Number(Math.random().toString().substr(2, 9));
+  }
+
   function addTodo() {
-    const newTodo = { TodoTitle: title, TodoContent: content };
+    const newTodo = {
+      id: generateId(),
+      TodoTitle: title,
+      TodoContent: content,
+    };
     const newTodoList = [...todoList, newTodo];
     setTodolist(newTodoList);
     setContent("");
@@ -33,7 +43,6 @@ export default () => {
         <div className="form-block">
           <label>タイトル</label>
           <input
-            id="input01"
             type="text"
             placeholder="Enter Title"
             value={title}
@@ -43,7 +52,6 @@ export default () => {
         <div className="form-block">
           <label>内容</label>
           <input
-            id="input02"
             type="text"
             placeholder="Enter Task"
             value={content}
@@ -55,6 +63,7 @@ export default () => {
       {todoList.map((todo, index) => {
         return (
           <div className="list" key={index}>
+            <div>ID:{todo.id}</div>
             <div className="title">Title:{todo.TodoTitle}</div>
             {todo.TodoContent}
           </div>
