@@ -1,12 +1,21 @@
-import React from 'react';
-import './App.css';
-import TodoList from './component/TodoList';
+import React from "react";
+import "./App.css";
+import TodoList from "./component/TodoList";
+import Todo from "./component/Todo";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  BrowserRouter,
+} from "react-router-dom";
 
 function App() {
   return (
-    <div>
+    <React.Fragment>
       <TodoList />
-    </div>
+      <Route path="/todo" />
+    </React.Fragment>
   );
 }
 
