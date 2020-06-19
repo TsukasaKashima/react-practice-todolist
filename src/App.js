@@ -3,7 +3,6 @@ import "./App.css";
 import TodoList from "./component/TodoList";
 import Todo from "./component/Todo";
 import {
-  BrowserRouter as Router,
   Switch,
   Route,
   Link,
@@ -12,10 +11,10 @@ import {
 
 function App() {
   return (
-    <React.Fragment>
-      <TodoList />
-      <Route path="/todo" />
-    </React.Fragment>
+    <BrowserRouter>
+      <Route path="/todo/1" component={Todo}/>
+      <Route exact  path="/" component={TodoList} />
+    </BrowserRouter>
   );
 }
 
