@@ -14,7 +14,7 @@ function App() {
   //const createId = history.pushState(null,null,"/todo/ クリックされたTodoのID ");
   return (
     <BrowserRouter>
-      <Route path={`/todo/${todo.id}`} component={Todo} />
+      <Route path={`/todo/:id`} component={Todo} />
       <Route exact path="/" component={TodoList} />
     </BrowserRouter>
   );
