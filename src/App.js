@@ -11,11 +11,12 @@ import {
 } from "react-router-dom";
 
 function App() {
+  //const createId = history.pushState(null,null,"/todo/ クリックされたTodoのID ");
   return (
-    <React.Fragment>
-      <TodoList />
-      <Route path="/todo" />
-    </React.Fragment>
+    <BrowserRouter>
+      <Route path={`/todo/${todo.id}`} component={Todo} />
+      <Route exact path="/" component={TodoList} />
+    </BrowserRouter>
   );
 }
 

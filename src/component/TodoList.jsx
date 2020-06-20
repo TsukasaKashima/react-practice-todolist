@@ -73,14 +73,7 @@ export default () => {
           <div className="list" key={index}>
             <div>ID:{todo.id}</div>
             <div className="title">Title:{todo.TodoTitle}</div>
-            <Link
-              to="/todo"
-              onClick={() => {
-                return <Todo />;
-              }}
-            >
-              {todo.TodoContent}
-            </Link>
+            <Link to={`/todo/${todo.id}`}>{todo.TodoContent}</Link>
           </div>
         );
       })}
