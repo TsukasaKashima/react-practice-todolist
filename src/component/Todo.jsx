@@ -1,5 +1,7 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 
 export default () => {
-  return <div>ダミーテキスト</div>;
+  const param = useParams();
+  return <React.Fragment>{param.id}</React.Fragment>;
 };

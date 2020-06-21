@@ -7,12 +7,13 @@ import {
   Link,
   BrowserRouter,
 } from "react-router-dom";
-import Todo from "./Todo";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 export default () => {
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
   const [todoList, setTodolist] = useState([]);
+  const history = useHistory();
 
   function handleChange(event) {
     const newValue = event.target.value;
@@ -70,7 +71,13 @@ export default () => {
       </div>
       {todoList.map((todo, index) => {
         return (
-          <div className="list" key={index}>
+          <div
+            onClick={() => {
+              history.push(`/todo/${todo.id}`);
+            }}
+            className="list"
+            key={index}
+          >
             <div>ID:{todo.id}</div>
             <div className="title">Title:{todo.TodoTitle}</div>
             <Link to={`/todo/${todo.id}`}>{todo.TodoContent}</Link>
