@@ -1,13 +1,7 @@
 import React from "react";
 import { useState } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  BrowserRouter,
-} from "react-router-dom";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { todoInfo } from "../actions";
 
 export default () => {
   const [content, setContent] = useState("");
@@ -80,7 +74,7 @@ export default () => {
           >
             <div>ID:{todo.id}</div>
             <div className="title">Title:{todo.TodoTitle}</div>
-            <Link to={`/todo/${todo.id}`}>{todo.TodoContent}</Link>
+            <div>{todo.TodoContent}</div>
           </div>
         );
       })}

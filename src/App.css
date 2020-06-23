@@ -44,10 +44,18 @@ body {
   margin-bottom: 2%;
 }
 
+.list:hover {
+  background-color: white;
+  opacity: 0.8;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
 label {
   display: block;
   margin-bottom: 0.5%;
 }
+
 .form-block {
   margin-bottom: 2%;
 }
