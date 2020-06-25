@@ -2,11 +2,11 @@ import React from "react";
 import { useState } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { todoInfo } from "../actions";
+import { connect } from "react-redux";
 
-export default () => {
+const TodoList = (props) => {
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
-  const [todoList, setTodolist] = useState([]);
   const history = useHistory();
 
   function handleChange(event) {
@@ -24,13 +24,7 @@ export default () => {
   }
 
   function addTodo() {
-    const newTodo = {
-      id: generateId(),
-      TodoTitle: title,
-      TodoContent: content,
-    };
-    const newTodoList = [...todoList, newTodo];
-    setTodolist(newTodoList);
+    props.addTodo(generateId(), title, content);
     setContent("");
     setTitle("");
     textAlert();
@@ -63,16 +57,16 @@ export default () => {
         </div>
         <button onClick={addTodo}>Add</button>
       </div>
-      {todoList.map((todo, index) => {
+      {props.todoList.map((todo, index) => {
         return (
           <div
             onClick={() => {
-              history.push(`/todo/${todo.id}`);
+              history.push(`/todo/${todo.TodoId}`);
             }}
             className="list"
             key={index}
           >
-            <div>ID:{todo.id}</div>
+            <div>ID:{todo.TodoId}</div>
             <div className="title">Title:{todo.TodoTitle}</div>
             <div>{todo.TodoContent}</div>
           </div>
@@ -81,3 +75,11 @@ export default () => {
     </div>
   );
 };
+
+const mapStateToProps = (state) => ({
+  todoList: state.todos,
+});
+const mapDispatchToProps = (dispatch) => ({
+  addTodo: (id, title, content) => dispatch(todoInfo(id, title, content)),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(TodoList);

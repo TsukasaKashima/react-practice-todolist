@@ -1,7 +1,15 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { connect } from "react-redux";
+import { todoInfo } from "../actions/";
 
-export default () => {
-  const param = useParams();
-  return <React.Fragment>{param.id}</React.Fragment>;
+const Todo = (props) => {
+  return <div>{props.todoInfo}</div>;
 };
+
+const mapStateToProps = ({ todoInfo }) => {
+  return { todoInfo: todoInfo };
+};
+
+const mapDispatchToProps = (dispatch) => ({ todoInfo });
+
+export default connect(mapStateToProps, mapDispatchToProps)(Todo);

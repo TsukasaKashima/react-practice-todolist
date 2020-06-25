@@ -1,12 +1,12 @@
-import { TODO_INFO } from "../actions";
+import { ADD_TODO } from "../actions";
 
 const todos = (state = [], action) => {
   switch (action.type) {
-    case TODO_INFO:
+    case ADD_TODO:
       return [
         ...state,
         {
-          TodoId: action.Todoid,
+          TodoId: action.TodoId,
           TodoTitle: action.TodoTitle,
           TodoContent: action.TodoContent,
         },
