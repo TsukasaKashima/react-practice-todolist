@@ -1,15 +1,19 @@
 import React from "react";
 import { connect } from "react-redux";
-import { todoInfo } from "../actions/";
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 
 const Todo = (props) => {
-  return <div>{props.todoInfo}</div>;
+  const params = useParams();
+  const todo = props.todos.find((todo) => {
+    return todo.TodoId === Number(params.id);
+  });
+  return <div>{todo ? todo.TodoTitle : ""}</div>;
 };
 
-const mapStateToProps = ({ todoInfo }) => {
-  return { todoInfo: todoInfo };
+const mapStateToProps = (state) => {
+  return { todos: state.todos };
 };
 
-const mapDispatchToProps = (dispatch) => ({ todoInfo });
+const mapDispatchToProps = () => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Todo);

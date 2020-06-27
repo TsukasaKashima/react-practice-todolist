@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { todoInfo } from "../actions";
+import { addTodo } from "../actions";
 import { connect } from "react-redux";
 
 const TodoList = (props) => {
@@ -57,7 +57,7 @@ const TodoList = (props) => {
         </div>
         <button onClick={addTodo}>Add</button>
       </div>
-      {props.todoList.map((todo, index) => {
+      {props.todos.map((todo, index) => {
         return (
           <div
             onClick={() => {
@@ -76,10 +76,13 @@ const TodoList = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  todoList: state.todos,
-});
+const mapStateToProps = (state) => {
+  return { todos: state.todos };
+};
+
+/*任意のキーaddTodoに対してアロー関数を設定している（左辺）。actionであるaddTodoの中身をdispatchすることで
+props.addTodoという形で呼び出せるようになる（右辺）*/
 const mapDispatchToProps = (dispatch) => ({
-  addTodo: (id, title, content) => dispatch(todoInfo(id, title, content)),
+  addTodo: (id, title, content) => dispatch(addTodo(id, title, content)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
