@@ -1,22 +1,22 @@
 import React from "react";
 import "./App.css";
-import TodoList from "./component/TodoList";
-import Todo from "./component/Todo";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  BrowserRouter,
-} from "react-router-dom";
+import TodoList from "./container/TodoList";
+import Todo from "./container/Todo";
+import { BrowserRouter, Route } from "react-router-dom";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+import reducers from "./reducers";
+
+let store = createStore(reducers);
 
 function App() {
-  //const createId = history.pushState(null,null,"/todo/ クリックされたTodoのID ");
   return (
-    <BrowserRouter>
-      <Route path={"/todo/:id"} component={Todo} />
-      <Route exact path="/" component={TodoList} />
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Route path={"/todo/:id"} component={Todo} />
+        <Route exact path="/" component={TodoList} />
+      </BrowserRouter>
+    </Provider>
   );
 }
 
