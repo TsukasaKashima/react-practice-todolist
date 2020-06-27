@@ -7,7 +7,7 @@ import { Provider } from "react-redux";
 import { createStore } from "redux";
 import reducers from "./reducers";
 
-let store = createStore(reducers, TodoList);
+let store = createStore(reducers);
 
 function App() {
   return (
