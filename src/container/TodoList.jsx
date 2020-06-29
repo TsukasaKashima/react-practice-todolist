@@ -80,8 +80,6 @@ const mapStateToProps = (state) => {
   return { todos: state.todos };
 };
 
-/*任意のキーaddTodoに対してアロー関数を設定している（左辺）。actionであるaddTodoの中身をdispatchすることで
-props.addTodoという形で呼び出せるようになる（右辺）*/
 const mapDispatchToProps = (dispatch) => ({
   addTodo: (id, title, content) => dispatch(addTodo(id, title, content)),
 });
