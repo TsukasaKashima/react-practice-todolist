@@ -1,4 +1,5 @@
 export const ADD_TODO = "ADD_TODO";
+export const DELETE_TODO = "DELETE_TODO";
 
 export const addTodo = (id, title, content) => {
   return {
@@ -6,5 +7,12 @@ export const addTodo = (id, title, content) => {
     TodoId: id,
     TodoTitle: title,
     TodoContent: content,
+  };
+};
+
+export const deleteTodo = (id) => {
+  return {
+    type: DELETE_TODO,
+    TodoId: id,
   };
 };
