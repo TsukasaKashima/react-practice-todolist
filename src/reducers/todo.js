@@ -13,7 +13,7 @@ const todos = (state = [], action) => {
       ];
     case DELETE_TODO:
       return state.filter((todo) => {
-        return todo.TodoId === Number(action.TodoId);
+        return todo.TodoId !== Number(action.TodoId);
       });
     default:
       return state;

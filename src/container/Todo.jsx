@@ -16,10 +16,6 @@ const Todo = (props) => {
   const todo = props.todos.find((todo) => {
     return todo.TodoId === Number(params.id);
   });
-  function deleteTodo(id) {
-    props.deleteTodo(id);
-    setIsOpenDeleteDialog(false);
-  }
   return (
     <React.Fragment>
       <div>{todo ? todo.TodoTitle : ""}</div>
@@ -42,7 +38,14 @@ const Todo = (props) => {
           >
             キャンセル
           </Button>
-          <Button onClick={deleteTodo}>削除する</Button>
+          <Button
+            onClick={() => {
+              props.deleteTodo(params.id);
+              setIsOpenDeleteDialog(false);
+            }}
+          >
+            削除する
+          </Button>
         </DialogActions>
       </Dialog>
     </React.Fragment>
