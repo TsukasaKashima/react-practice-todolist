@@ -64,3 +64,26 @@ label {
   font-size: 2.2vw;
   font-weight: bold;
 }
+
+.btns {
+  text-align: center;
+}
+
+.todoList {
+  border-radius: 10px;
+  font-size: 1.5vw;
+  padding: 0.5%;
+  display: block;
+  margin: 5% auto 0 auto;
+  width: 35%;
+  list-style: none;
+  background-color: #b0e6ff;
+  margin-bottom: 2%;
+}
+
+.todoList input {
+  font-size: 1.2vw;
+  border: none;
+  border-bottom: 1px solid #bababa;
+  background-color: #b0e6ff;
+}
