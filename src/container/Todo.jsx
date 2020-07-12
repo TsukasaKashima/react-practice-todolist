@@ -18,8 +18,8 @@ const Todo = (props) => {
   const todo = props.todos.find((todo) => {
     return todo.TodoId === Number(params.id);
   });
-  const [content, setContent] = useState("");
-  const [title, setTitle] = useState("");
+  const [content, setContent] = useState(todo ? todo.TodoContent : "");
+  const [title, setTitle] = useState(todo ? todo.TodoTitle : "");
   function handleChange(event) {
     const newValue = event.target.value;
     setContent(newValue);
@@ -28,25 +28,17 @@ const Todo = (props) => {
     const newTitle = event.target.value;
     setTitle(newTitle);
   }
-  /*function updateTodo() {
-    props.updateTodo(title, content);
-  }*/
+  function updateTodo() {
+    props.updateTodo(params.id, title, content);
+  }
   return (
     <React.Fragment>
       <div className="todoList">
         <div className="title">
           Title:
-          <input
-            type="text"
-            value={todo ? todo.TodoTitle : ""}
-            onChange={handleChange}
-          />
+          <input type="text" value={title} onChange={titleChange} />
         </div>
-        <input
-          type="text"
-          value={todo ? todo.TodoContent : ""}
-          onChange={titleChange}
-        />
+        <input type="text" value={content} onChange={handleChange} />
       </div>
       <div className="btns">
         <Button
@@ -80,6 +72,8 @@ const Todo = (props) => {
             onClick={() => {
               props.deleteTodo(params.id);
               setIsOpenDeleteDialog(false);
+              setTitle("");
+              setContent("");
             }}
           >
             削除する
@@ -100,7 +94,7 @@ const Todo = (props) => {
           </Button>
           <Button
             onClick={() => {
-              props.updateTodo(title, content);
+              updateTodo();
               setIsOpenUpdateDialog(false);
             }}
           >
@@ -118,7 +112,7 @@ const mapStateToProps = ({ todos }) => {
 
 const mapDispatchToProps = (dispatch) => ({
   deleteTodo: (id, title, content) => dispatch(deleteTodo(id, title, content)),
-  updateTodo: (title, content) => dispatch(updateTodo(title, content)),
+  updateTodo: (id, title, content) => dispatch(updateTodo(id, title, content)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Todo);

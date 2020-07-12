@@ -16,10 +16,13 @@ const todos = (state = [], action) => {
         return todo.TodoId !== Number(action.TodoId);
       });
     case UPDATE_TODO:
-      delete state[action.TodoId];
+      const updateTodo = state.filter((todo) => {
+        return todo.TodoId !== Number(action.TodoId);
+      });
       return [
-        ...state,
+        ...updateTodo,
         {
+          Todoid: action.TodoId,
           TodoTitle: action.TodoTitle,
           TodoContent: action.TodoContent,
         },

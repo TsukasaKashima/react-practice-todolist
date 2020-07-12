@@ -18,9 +18,10 @@ export const deleteTodo = (id) => {
   };
 };
 
-export const updateTodo = (title, content) => {
+export const updateTodo = (id, title, content) => {
   return {
     type: UPDATE_TODO,
+    TodoId: id,
     TodoTitle: title,
     TodoContent: content,
   };
