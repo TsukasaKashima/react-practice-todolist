@@ -27,12 +27,6 @@ const TodoList = (props) => {
     props.addTodo(generateId(), title, content);
     setContent("");
     setTitle("");
-    textAlert();
-  }
-  function textAlert() {
-    if (title === "" || content === "") {
-      alert("いずれかが未入力です");
-    }
   }
   return (
     <div>
