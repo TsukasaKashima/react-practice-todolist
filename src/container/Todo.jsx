@@ -10,6 +10,7 @@ import {
 } from "@material-ui/core";
 import { deleteTodo } from "../actions";
 import { updateTodo } from "../actions";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const Todo = (props) => {
   const params = useParams();
@@ -20,6 +21,7 @@ const Todo = (props) => {
   });
   const [content, setContent] = useState(todo ? todo.TodoContent : "");
   const [title, setTitle] = useState(todo ? todo.TodoTitle : "");
+  const history = useHistory();
   function handleChange(event) {
     const newValue = event.target.value;
     setContent(newValue);
@@ -72,8 +74,7 @@ const Todo = (props) => {
             onClick={() => {
               props.deleteTodo(params.id);
               setIsOpenDeleteDialog(false);
-              setTitle("");
-              setContent("");
+              history.push("/");
             }}
           >
             削除する
@@ -95,7 +96,8 @@ const Todo = (props) => {
           <Button
             onClick={() => {
               updateTodo();
-              setIsOpenUpdateDialog(false);
+              setIsOpenUpdateDialog(true);
+              history.push("/");
             }}
           >
             更新する
