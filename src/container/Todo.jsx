@@ -73,7 +73,7 @@ const Todo = (props) => {
           <Button
             onClick={() => {
               props.deleteTodo(params.id);
-              setIsOpenDeleteDialog(false);
+              setIsOpenDeleteDialog(true);
               history.push("/");
             }}
           >

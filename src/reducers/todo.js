@@ -22,7 +22,7 @@ const todos = (state = [], action) => {
       return [
         ...updateTodo,
         {
-          Todoid: action.TodoId,
+          TodoId: action.TodoId,
           TodoTitle: action.TodoTitle,
           TodoContent: action.TodoContent,
         },
