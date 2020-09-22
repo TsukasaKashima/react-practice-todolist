@@ -1,25 +1,31 @@
-import React, { useState } from "react";
-import { connect } from "react-redux";
+import React, { useState, useContext, useEffect } from "react";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import {
   Button,
   Dialog,
   DialogContent,
   DialogContentText,
-  DialogActions,
+  DialogActions
 } from "@material-ui/core";
-import { deleteTodo } from "../actions";
-import { updateTodo } from "../actions";
+import { AppContext } from "../context/ApiContext";
 
-const Todo = (props) => {
+export default props => {
   const params = useParams();
   const [isOpenDeleteDialog, setIsOpenDeleteDialog] = useState(false);
   const [isOpenUpdateDialog, setIsOpenUpdateDialog] = useState(false);
-  const todo = props.todos.find((todo) => {
-    return todo.TodoId === Number(params.id);
-  });
-  const [content, setContent] = useState(todo ? todo.TodoContent : "");
-  const [title, setTitle] = useState(todo ? todo.TodoTitle : "");
+  const { todos } = useContext(AppContext);
+
+  const [content, setContent] = useState("");
+  const [title, setTitle] = useState("");
+  useEffect(() => {
+    const todo = todos.find(todo => {
+      return todo.id === params.id;
+    });
+    if (todo) {
+      setContent(todo.content);
+      setTitle(todo.title);
+    }
+  }, [params.id, todos]);
   function handleChange(event) {
     const newValue = event.target.value;
     setContent(newValue);
@@ -105,14 +111,3 @@ const Todo = (props) => {
     </React.Fragment>
   );
 };
-
-const mapStateToProps = ({ todos }) => {
-  return { todos: todos };
-};
-
-const mapDispatchToProps = (dispatch) => ({
-  deleteTodo: (id) => dispatch(deleteTodo(id)),
-  updateTodo: (id, title, content) => dispatch(updateTodo(id, title, content)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Todo);

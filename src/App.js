@@ -1,24 +1,20 @@
 import React from "react";
 import "./App.css";
-import TodoList from "./container/TodoList";
-import Todo from "./container/Todo";
+import TodoList from "./components/TodoList";
+import Todo from "./components/Todo";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { Provider } from "react-redux";
-import { createStore } from "redux";
-import reducers from "./reducers";
-
-let store = createStore(reducers);
+import { AppContextProvider } from "./context/ApiContext";
 
 function App() {
   return (
-    <Provider store={store}>
+    <AppContextProvider>
       <BrowserRouter>
         <Switch>
           <Route path={"/todo/:id"} component={Todo} />
           <Route exact path="/" component={TodoList} />
         </Switch>
       </BrowserRouter>
-    </Provider>
+    </AppContextProvider>
   );
 }
 
