@@ -14,7 +14,6 @@ export const AppContextProvider = props => {
       .then(data => {
         data.forEach(todo => {
           const data = todo.data();
-          console.log(todo.data());
           tmpTodos.push({
             id: todo.id,
             title: data.title,
@@ -41,8 +40,27 @@ export const AppContextProvider = props => {
       });
   }
 
+  function updateTodo(id, title, content) {
+    firestore
+      .collection("todos")
+      .doc(id)
+      .update({
+        title,
+        content
+      });
+  }
+
+  function deleteTodo(id) {
+    firestore
+      .collection("todos")
+      .doc(id)
+      .delete();
+  }
+
   return (
-    <AppContext.Provider value={{ todos, setTodos, addTodo }}>
+    <AppContext.Provider
+      value={{ todos, setTodos, addTodo, updateTodo, deleteTodo }}
+    >
       {props.children}
     </AppContext.Provider>
   );

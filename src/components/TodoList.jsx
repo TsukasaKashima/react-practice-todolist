@@ -7,7 +7,7 @@ export default props => {
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
   const history = useHistory();
-  const { todos, addTodo, setTodos } = useContext(AppContext);
+  const { todos, addTodo } = useContext(AppContext);
   function handleChange(event) {
     const newValue = event.target.value;
     setContent(newValue);

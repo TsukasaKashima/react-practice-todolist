@@ -13,7 +13,7 @@ export default props => {
   const params = useParams();
   const [isOpenDeleteDialog, setIsOpenDeleteDialog] = useState(false);
   const [isOpenUpdateDialog, setIsOpenUpdateDialog] = useState(false);
-  const { todos } = useContext(AppContext);
+  const { todos, updateTodo, deleteTodo } = useContext(AppContext);
 
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
@@ -34,9 +34,7 @@ export default props => {
     const newTitle = event.target.value;
     setTitle(newTitle);
   }
-  function updateTodo() {
-    props.updateTodo(params.id, title, content);
-  }
+
   return (
     <React.Fragment>
       <div className="todoList">
@@ -76,7 +74,7 @@ export default props => {
           </Button>
           <Button
             onClick={() => {
-              props.deleteTodo(params.id);
+              deleteTodo(params.id);
               setIsOpenDeleteDialog(false);
               setTitle("");
               setContent("");
@@ -100,7 +98,7 @@ export default props => {
           </Button>
           <Button
             onClick={() => {
-              updateTodo();
+              updateTodo(params.id, title, content);
               setIsOpenUpdateDialog(false);
             }}
           >
